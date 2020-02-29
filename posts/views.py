@@ -53,7 +53,7 @@ def post_view(request, username, post_id):
 
 def post_edit(request, username, post_id):
     post = get_object_or_404(Post, id = post_id)
-    if request.user != post.author:
+    if request.user != post:
         return redirect("post", username, post_id)
     form = PostForm(request.POST)
     if form.is_valid():
