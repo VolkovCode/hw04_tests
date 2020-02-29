@@ -6,7 +6,7 @@
     <h1>{{ group.title }}</h1>
     <p>{{ group.description }}</p>  
 
-    {% for post in posts %}
+    {% for post in page %}
         <h3>
              Автор: {{ post.author }}, дата публикации: {{ post.pub_date|date:"d M Y" }}
         </h3>
@@ -14,5 +14,9 @@
         <hr>
     {% endfor %}  
     
+    {% if page.has_other_pages %}
+        {% include "posts/paginator.html" with items=page paginator=paginator%}   
+    {% endif %}
+
   </body>
 {% endblock %}
