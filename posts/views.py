@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from .models import Post, Group, User
-from .forms import PostForm, EditForm
+from .forms import PostForm
 
 
 def index(request):
@@ -13,10 +13,6 @@ def index(request):
     return render(request, 'posts/index.html', {'page': page, 'paginator': paginator})
 
 
-#def group_posts(request, slug):
-    #group = get_object_or_404(Group, slug=slug)
-    #posts = Post.objects.filter(group=group).order_by("-pub_date")[:12]
-    #return render(request, "group.html", {"group": group, "posts": posts}) 
 def group_posts(request, slug): 
     group = get_object_or_404(Group, slug=slug)
     posts = Post.objects.filter(group=group).order_by("-pub_date")[:12]
@@ -69,10 +65,4 @@ def post_edit(request, username, post_id):
         post.save()
         return redirect("post", username, post_id)
     form = PostForm()
-    return render(request, "posts/post_edit.html", {"form": form, 'post':post})   
-   
-
-
-
-
-  
+    return render(request, "posts/post_edit.html", {"form": form, 'post':post})    
