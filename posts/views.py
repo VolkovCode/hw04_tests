@@ -54,7 +54,7 @@ def post_view(request, username, post_id):
 def post_edit(request, username, post_id):
     post = get_object_or_404(Post, id = post_id)
     if request.user != post.author:
-        return redirect(post_view)
+        return redirect("post", username, post_id)
     form = PostForm(request.POST)
     if form.is_valid():
         post.text = form.cleaned_data['text']
@@ -63,7 +63,7 @@ def post_edit(request, username, post_id):
         return redirect(index)
     form = PostForm()
     return render(request, "posts/post_edit.html", {"form": form, 'post':post})   
-    #return render(request, "posts/post_new.html", {})
+   
 
 
 
