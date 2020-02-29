@@ -24,7 +24,7 @@ def group_posts(request, slug):
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
     return render(request, "group.html", {"group": group, 'page': page, 'paginator': paginator}) 
-    
+
 
 def new_post(request):
     user = request.user
@@ -67,7 +67,7 @@ def post_edit(request, username, post_id):
         post.text = form.cleaned_data['text']
         post.group = form.cleaned_data['group']
         post.save()
-        return redirect(index)
+        return redirect("post", username, post_id)
     form = PostForm()
     return render(request, "posts/post_edit.html", {"form": form, 'post':post})   
    
