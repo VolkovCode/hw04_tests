@@ -40,16 +40,9 @@ def profile(request, username):
     page_number = request.GET.get('page') # переменная в URL с номером запрошенной страницы
     page = paginator.get_page(page_number) # получить записи с нужным смещением
     count = post_list.count
-    
-    #count = post_list.count
     return render(request, "posts/profile.html", {'count':count, 'author':author, 'page': page, 'paginator': paginator})
    
-#def post_view(request, username, post_id):
-    #author = get_object_or_404(User, username = username)
-    #post = Post.objects.get(pk=post_id)
-    #posts = Post.objects.filter(author = author).order_by('-pub_date')
-    #count = posts.count
-    #return render(request, "posts/post.html", {'post':post, 'count':count, 'author':author})  
+  
 def post_view(request, username, post_id):
     author = get_object_or_404(User, username = username)
     post = Post.objects.get(pk=post_id)
