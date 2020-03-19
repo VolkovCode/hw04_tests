@@ -25,6 +25,8 @@ def group_posts(request, slug):
 def new_post(request):
     user = request.user
     form = PostForm(request.POST)
+    if not request.user.is_authenticated:
+        return redirect(index)
     if request.method == 'POST':
         if form.is_valid():
             n_post = form.save(commit=False)
@@ -34,7 +36,7 @@ def new_post(request):
         return render(request, 'posts/new_post.html', {'form': form})        
     form = PostForm()
     return render(request, 'posts/new_post.html', {'form': form})   
-
+    
 
 def profile(request, username):
     author = get_object_or_404(User, username = username)
