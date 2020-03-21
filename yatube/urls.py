@@ -19,14 +19,15 @@ from django.contrib.flatpages import views
 
 urlpatterns = [
         # раздел администратора
-    path("admin/", admin.site.urls),
+    path("", include("posts.urls")),
         # flatpages
     path("about/", include("django.contrib.flatpages.urls")),
         # регистрация и авторизация
     path("auth/", include("users.urls")),
     path("auth/", include("django.contrib.auth.urls")),
         # импорт из приложения posts
-    path("", include("posts.urls")),
+    
+    path("admin/", admin.site.urls),
 ]
 
 urlpatterns += [
